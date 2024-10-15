@@ -227,7 +227,7 @@ class CarInterface(CarInterfaceBase):
         CarInterfaceBase.configure_torque_tune(candidate, ret.lateralTuning)
 
     elif candidate in (CAR.CHEVROLET_BOLT_EUV, CAR.CHEVROLET_BOLT_CC):
-      ret.steerActuatorDelay = 0.2
+      ret.steerActuatorDelay = 0.15
       CarInterfaceBase.configure_torque_tune(candidate, ret.lateralTuning)
 
       if ret.enableGasInterceptor:
