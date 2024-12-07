@@ -2366,7 +2366,7 @@ struct Event {
     customReservedRawData2 @126 :Data;
 
     # NDA neokii
-    naviData @128 :NaviData;
+    naviData @129 :NaviData;
 
     # *********** Custom: reserved for forks ***********
     frogpilotCarControl @107 :Custom.FrogPilotCarControl;
