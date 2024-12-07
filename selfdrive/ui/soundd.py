@@ -59,7 +59,6 @@ sound_list: dict[int, tuple[str, int | None, float]] = {
   AudibleAlert.uwu: ("uwu.wav", 1, MAX_VOLUME),
 
   # Other
-  AudibleAlert.goatOther: ("goat.wav", None, MAX_VOLUME),
   AudibleAlert.speedDown: ("speeddown.wav", 3, MAX_VOLUME),
 }
 
