@@ -18,6 +18,7 @@ from openpilot.common.params import Params
 import time
 
 CAMERA_SPEED_FACTOR = 1.0
+terminate_flag = threading.Event()
 
 
 class Port:
@@ -26,9 +27,14 @@ class Port:
   LOCATION_PORT = BROADCAST_PORT
 
 
+
 class NaviServer:
   def __init__(self):
+
+    self.sm = messaging.SubMaster(['gpsLocationExternal', 'carState'])
+
     self.json_road_limit = None
+    self.json_traffic_signal = None
     self.active = 0
     self.last_updated = 0
     self.last_updated_active = 0
@@ -40,31 +46,32 @@ class NaviServer:
     self.last_time_location = 0
 
     broadcast = Thread(target=self.broadcast_thread, args=[])
-    broadcast.daemon = True
     broadcast.start()
 
-    self.gps_sm = messaging.SubMaster(['gpsLocationExternal'], poll='gpsLocationExternal')
+    # subprocess.Popen([os.path.join(os.path.dirname(os.path.abspath(__file__)), 'ngpsd')])
+    # subprocess.Popen([os.path.join(os.path.dirname(os.path.abspath(__file__)), 'nobsd')])
+
+    update = Thread(target=self.update_thread, args=[self.sm])
+    update.start()
+
     self.gps_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
     self.location = None
 
-    self.gps_event = threading.Event()
     gps_thread = Thread(target=self.gps_thread, args=[])
-    gps_thread.daemon = True
     gps_thread.start()
 
   def gps_thread(self):
-    rk = Ratekeeper(3.0, print_delay_threshold=None)
-    while True:
+    rk = Ratekeeper(1.0, print_delay_threshold=None)
+    while not terminate_flag.is_set():
       self.gps_timer()
       rk.keep_time()
 
   def gps_timer(self):
     try:
       if self.remote_gps_addr is not None:
-        self.gps_sm.update(0)
-        if self.gps_sm.updated['gpsLocationExternal']:
-          self.location = self.gps_sm['gpsLocationExternal']
+        if self.sm.updated['gpsLocationExternal']:
+          self.location = self.sm['gpsLocationExternal']
 
         if self.location is not None:
           json_location = json.dumps({"location": [
@@ -73,7 +80,7 @@ class NaviServer:
             self.location.altitude,
             self.location.speed,
             self.location.bearingDeg,
-            self.location.accuracy,
+            self.location.horizontalAccuracy,
             self.location.unixTimestampMillis,
             # self.location.source,
             # self.location.vNED,
@@ -132,6 +139,20 @@ class NaviServer:
 
       except:
         pass
+
+  def update_thread(self, sm):
+    rk = Ratekeeper(10, print_delay_threshold=None)
+
+    while not terminate_flag.is_set():
+      sm.update(0)
+
+      # if sm.updated['carState']:
+      #   v_ego = sm['carState'].vEgo
+      #   with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as sock:
+      #     data_in_bytes = struct.pack('!f', v_ego)
+      #     sock.sendto(data_in_bytes, ('127.0.0.1', 3847))
+
+      rk.keep_time()
 
   def send_sdp(self, sock):
     try:
@@ -424,6 +445,11 @@ class SpeedLimiter:
     self.slowing_down = False
     return 0, 0, 0, False, log
 
+def signal_handler(sig, frame):
+  print('Ctrl+C pressed, exiting.')
+  terminate_flag.set()
+  sys.exit(0)
 
 if __name__ == "__main__":
+  signal.signal(signal.SIGINT, signal_handler)
   main()
