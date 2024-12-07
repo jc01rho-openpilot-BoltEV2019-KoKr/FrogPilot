@@ -155,7 +155,11 @@
     </message>
     <message>
         <source>Accel: %1%2</source>
-        <translation>엑셀: %1%2</translation>
+        <translation>가속: %1%2</translation>
+    </message>
+    <message>
+    <source>T-Accel: %1%2</source>
+    <translation>목표가속: %1%2</translation>
     </message>
     <message>
         <source> - Max: %1%2</source>
