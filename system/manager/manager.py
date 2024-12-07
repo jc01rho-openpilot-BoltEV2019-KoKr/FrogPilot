@@ -94,7 +94,6 @@ def manager_init() -> None:
     ("BlacklistedModels", ""),
     ("BlindSpotMetrics", "0"),
     ("BlindSpotPath", "1"),
-    ("BonusContent", "1"),
     ("BorderMetrics", "1"),
     ("CameraView", "2"),
     ("CarMake", ""),
