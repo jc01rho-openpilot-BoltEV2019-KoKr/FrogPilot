@@ -1,20 +1,21 @@
 import json
 import os
-
 import select
+import signal
 import subprocess
+import sys
 import threading
 import time
 import socket
 import fcntl
 import struct
+from collections import deque
 from threading import Thread
-from cereal import messaging, log
-from openpilot.common.numpy_fast import clip, interp
-from openpilot.common.conversions import Conversions as CV
-from openpilot.system.hardware import TICI
+from cereal import messaging
+from openpilot.common.numpy_fast import clip, interp, mean
 from openpilot.common.realtime import Ratekeeper
 from openpilot.common.params import Params
+from openpilot.common.conversions import Conversions as CV
 import time
 
 CAMERA_SPEED_FACTOR = 1.0
