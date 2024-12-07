@@ -251,6 +251,7 @@ static void update_state(UIState *s) {
   if (sm.updated("carControl")) {
     auto carControl = sm["carControl"].getCarControl();
     scene.steer = carControl.getActuators().getSteer();
+    scene.desired_acceleration = carControl.getActuators().getAccel();
   }
   if (sm.updated("carParams")) {
     scene.longitudinal_control = sm["carParams"].getCarParams().getOpenpilotLongitudinalControl();
@@ -258,6 +259,7 @@ static void update_state(UIState *s) {
   if (sm.updated("carState")) {
     auto carState = sm["carState"].getCarState();
     scene.acceleration = carState.getAEgo();
+
     scene.blind_spot_left = carState.getLeftBlindspot();
     scene.blind_spot_right = carState.getRightBlindspot();
     scene.parked = carState.getGearShifter() == cereal::CarState::GearShifter::PARK;
