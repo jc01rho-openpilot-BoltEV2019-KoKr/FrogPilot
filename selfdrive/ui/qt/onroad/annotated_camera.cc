@@ -1063,7 +1063,6 @@ void AnnotatedCameraWidget::updateFrogPilotVariables(int alert_height, const UIS
   showConditionalExperimentalStatusBar = scene.cem_status_bar;
 
   currentAcceleration = scene.acceleration;
-  desiredAcceleration = scene.desired_acceleration;
 
   desiredFollow = scene.desired_follow;
   stoppedEquivalence = scene.stopped_equivalence;
@@ -1287,7 +1286,6 @@ void AnnotatedCameraWidget::drawLeadInfo(QPainter &p) {
   constexpr int maxAccelDuration = 5000;
 
   double acceleration = std::round(currentAcceleration * 100) / 100;
-  double targetAcceleration = std::round(desiredAcceleration * 100) / 100;
 
   auto resetTimer = [&]() {
     timer.start();
@@ -1307,10 +1305,6 @@ void AnnotatedCameraWidget::drawLeadInfo(QPainter &p) {
 
   QString accelText = QString(tr("Accel: %1%2"))
                       .arg(acceleration * accelerationConversion, 0, 'f', 2)
-                      .arg(accelerationUnit);
-
-  QString targetAccelText = QString(tr("T-Accel: %1%2"))
-                      .arg(targetAcceleration * accelerationConversion, 0, 'f', 2)
                       .arg(accelerationUnit);
 
   QString maxAccSuffix;
@@ -1340,7 +1334,7 @@ void AnnotatedCameraWidget::drawLeadInfo(QPainter &p) {
   QRect adjustedRect(insightsRect.adjusted(0, 27, 0, 27));
   int textBaseLine = adjustedRect.y() + (adjustedRect.height() + p.fontMetrics().height()) / 2 - p.fontMetrics().descent();
 
-  QStringList texts = {accelText, targetAccelText, maxAccSuffix, obstacleText, createDiffText(obstacleDistance, obstacleDistanceStock), stopText, followText};
+  QStringList texts = {accelText, maxAccSuffix, obstacleText, createDiffText(obstacleDistance, obstacleDistanceStock), stopText, followText};
   QList<QColor> colors = {Qt::white, isFiveSecondsPassed ? Qt::white : redColor(), Qt::white, (obstacleDistance - obstacleDistanceStock) > 0 ? Qt::green : Qt::red, Qt::white, Qt::white};
 
   int totalTextWidth = 0;

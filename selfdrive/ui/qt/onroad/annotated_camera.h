@@ -52,7 +52,6 @@ private:
   bool staticPedals;
 
   float acceleration;
-
 };
 
 class AnnotatedCameraWidget : public CameraWidget {
@@ -165,7 +164,6 @@ private:
   bool vtscEnabled;
 
   double currentAcceleration;
-  double desiredAcceleration;
 
   float accelerationConversion;
   float dashboardSpeedLimit;
