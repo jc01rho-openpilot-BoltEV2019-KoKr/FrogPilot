@@ -149,6 +149,9 @@ struct CarEvent @0x9b1657f34caf3ad3 {
     yourFrogTriedToKillMe @149;
     youveGotMail @150;
 
+    # NDA Neokii
+    slowingDownSpeedSound @151;
+
     radarCanErrorDEPRECATED @15;
     communityFeatureDisallowedDEPRECATED @62;
     radarCommIssueDEPRECATED @67;
@@ -459,6 +462,12 @@ struct CarControl {
       noice @19;
       thisIsFine @20;
       uwu @21;
+
+      # Other
+      goat @22;
+
+      # NDA
+      speedDown @23;
     }
   }
 
