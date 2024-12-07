@@ -464,7 +464,7 @@ struct CarControl {
       uwu @21;
 
       # Other
-      goat @22;
+      goatOther @22;
 
       # NDA
       speedDown @23;
