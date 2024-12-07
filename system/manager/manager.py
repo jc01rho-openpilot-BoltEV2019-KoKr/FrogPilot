@@ -359,7 +359,9 @@ def manager_init() -> None:
     ("WD40Drives", "0"),
     ("WD40Score", "0"),
     ("WheelIcon", "frog"),
-    ("WheelSpeed", "0")
+    ("WheelSpeed", "0"),
+    ("AutoNaviSpeedCtrlStart", "25"),
+    ("AutoNaviSpeedCtrlEnd", "15"),
   ]
   if not PC:
     default_params.append(("LastUpdateTime", datetime.datetime.utcnow().isoformat().encode('utf8')))
