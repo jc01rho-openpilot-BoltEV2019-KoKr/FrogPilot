@@ -10,6 +10,40 @@ env:
   BUILD: selfdrive/test/docker_build.sh prebuilt
 
 jobs:
+  python-lint:
+    # This workflow contains a single job called "build"
+      name: Lint
+      if: github.repository == 'jc01rho-openpilot-BoltEV2019-KoKr/FrogPilot'
+      runs-on: ubuntu-20.04
+      # Steps represent a sequence of tasks that will be executed as part of the job
+      steps:
+        - uses: actions/checkout@v3
+        - name: Python Linter
+          uses: jc01rho/python-lint@master
+          with:
+            python-root-list: selfdrive/car/gm/** selfdrive/car/*.py selfdrive/controls/*.py
+            use-pylint: true
+            use-pycodestyle: false
+            use-flake8: true
+            use-black: false
+            use-mypy: false
+            use-isort: false
+            extra-pylint-options: --disable=C,R,W1514,W0719,W0108,W1203,E0401,W0612,W0101,W0611,W0613,W0511,W0311,W0703,W0621,W0201,W0109,W0235,W0603,W0212,W0107,W0702,W0106
+            extra-flake8-options: --select=F21,F822,F823,F831,F811,F812,E999
+
+        - name: Python Linter
+          if: always()
+          uses: jc01rho/python-lint@master
+          with:
+            python-root-list: selfdrive/controls/lib/*.py
+            use-pylint: true
+            use-pycodestyle: false
+            use-flake8: true
+            use-black: false
+            use-mypy: false
+            use-isort: false
+            extra-pylint-options: --disable=C,R,W1514,W0719,W0108,W1203,E0401,W0612,W0101,W0611,W0613,W0511,W0311,W0703,W0621,W0201,W0109,W0235,W0603,W0106,W0107,W0702,W0212,W0105,W0128,W0125
+            extra-flake8-options: --select=F21,F822,F823,F831,F811,F812,E999
   build_prebuilt:
     name: build prebuilt
     runs-on: ubuntu-latest
