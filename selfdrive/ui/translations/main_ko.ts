@@ -4244,7 +4244,7 @@ This may take up to a minute.</source>
     <name>SoftwarePanel</name>
     <message>
         <source>Updates are only downloaded while the car is off.</source>
-        <translation type="vanished">업데이트는 차량 시동이 꺼졌을 때 다운로드됩니다.</translation>
+        <translation>업데이트는 차량 시동이 꺼졌을 때 다운로드됩니다.</translation>
     </message>
     <message>
         <source>Current Version</source>
@@ -5157,7 +5157,7 @@ This may take up to a minute.</source>
     </message>
     <message>
         <source>Forces comma's auto lateral tuning for unsupported vehicles.</source>
-        <translation>지원되지 않는 차량에 대해 쉼표의 자동 측면 튜닝을 강제로 적용합니다.</translation>
+        <translation>지원되지 않는 차량에 대해 콤마의 자동 측면 튜닝을 강제로 적용합니다.</translation>
     </message>
     <message>
         <source>NNFF</source>
@@ -5165,7 +5165,7 @@ This may take up to a minute.</source>
     </message>
     <message>
         <source>Use Twilsonco's Neural Network Feedforward for enhanced precision in lateral control.</source>
-        <translation>측면 제어의 정확도를 높이려면 Twilsonco의 신경망 피드포워드를 사용하세요.</translation>
+        <translation>측면 제어의 정확도를 높이려면 Twilsonco의 신경망 피드포워드(NNFF)를 사용하세요.</translation>
     </message>
     <message>
         <source>NNFF-Lite</source>
@@ -5173,15 +5173,15 @@ This may take up to a minute.</source>
     </message>
     <message>
         <source>Use Twilsonco's Neural Network Feedforward for enhanced precision in lateral control for cars without available NNFF logs.</source>
-        <translation>NNFF 로그가 없는 차량의 측면 제어 정확도를 높이려면 Twilsonco의 신경망 피드포워드를 사용하세요.</translation>
+        <translation>NNFF 로그가 없는 차량의 측면 제어 정확도를 높이려면 Twilsonco의 신경망 피드포워드(NNFF)를 사용하세요.</translation>
     </message>
     <message>
         <source>Steer Ratio</source>
-        <translation>조향 비율</translation>
+        <translation>조향 비율(Steer Ratio, SR)</translation>
     </message>
     <message>
         <source>Use a custom steer ratio as opposed to comma's auto tune value.</source>
-        <translation>콤마의 자동 튜닝 값 대신 사용자 정의 조향 비율을 사용합니다.</translation>
+        <translation>콤마의 자동 튜닝 값 대신 사용자 정의 조향 비율(Steer Ratio, SR)을 사용합니다.</translation>
     </message>
     <message>
         <source>Taco Tune</source>
