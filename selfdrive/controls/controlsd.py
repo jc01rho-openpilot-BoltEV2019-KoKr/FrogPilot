@@ -39,7 +39,7 @@ from openpilot.selfdrive.frogpilot.frogpilot_variables import NON_DRIVING_GEARS,
 SOFT_DISABLE_TIME = 3  # seconds
 LDW_MIN_SPEED = 31 * CV.MPH_TO_MS
 LANE_DEPARTURE_THRESHOLD = 0.1
-CAMERA_OFFSET = 0.04
+CAMERA_OFFSET = 0.06
 
 REPLAY = "REPLAY" in os.environ
 SIMULATION = "SIMULATION" in os.environ
